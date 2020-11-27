@@ -1,3 +1,3 @@
-const APP_ID = "f260ee11ebae45bd8aefa1289c005a88";
-const Token =
-    "006f260ee11ebae45bd8aefa1289c005a88IAC39bNfs2ACz4YoTko3/VFy//A2Vukmfsmj6pS31B4DPaDfQtYAAAAAEABID2UqYV27XwEAAQBhXbtf";
+var APP_ID = '';
+var Token = '';
+var channelName = '';

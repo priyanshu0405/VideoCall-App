@@ -3,6 +3,8 @@ import 'package:agora_rtc_engine/rtc_engine.dart';
 import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'call.dart';
+import 'settings.dart';
+import 'package:firebase_database/firebase_database.dart';
 
 class IndexPage extends StatefulWidget {
   @override
@@ -11,6 +13,16 @@ class IndexPage extends StatefulWidget {
 
 class IndexState extends State<IndexPage> {
   ClientRole _role = ClientRole.Broadcaster;
+  final dbRef = FirebaseDatabase.instance.reference();
+  @override
+  void initState() {
+    dbRef.once().then((DataSnapshot snapshot) {
+      APP_ID = snapshot.value["videoCall"]["App_Id"];
+      Token = snapshot.value["videoCall"]["Temp_token"];
+      channelName = snapshot.value["videoCall"]["Channel_name"];
+    });
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +64,6 @@ class IndexState extends State<IndexPage> {
       context,
       MaterialPageRoute(
         builder: (context) => CallPage(
-          channelName: 'demo',
           role: _role,
         ),
       ),

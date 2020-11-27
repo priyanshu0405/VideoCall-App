@@ -4,15 +4,12 @@ import 'package:agora_rtc_engine/rtc_engine.dart';
 import 'package:agora_rtc_engine/rtc_local_view.dart' as RtcLocalView;
 import 'package:agora_rtc_engine/rtc_remote_view.dart' as RtcRemoteView;
 import 'package:flutter/material.dart';
-
 import 'settings.dart';
 
 class CallPage extends StatefulWidget {
-  final String channelName;
-
   final ClientRole role;
 
-  const CallPage({Key key, this.channelName, this.role}) : super(key: key);
+  const CallPage({Key key, this.role}) : super(key: key);
 
   @override
   _CallPageState createState() => _CallPageState();
@@ -21,6 +18,7 @@ class CallPage extends StatefulWidget {
 class _CallPageState extends State<CallPage> {
   final _users = <int>[];
   final _infoStrings = <String>[];
+
   bool muted = false;
   RtcEngine _engine;
   @override
@@ -67,7 +65,7 @@ class _CallPageState extends State<CallPage> {
     VideoEncoderConfiguration configuration = VideoEncoderConfiguration();
     configuration.dimensions = VideoDimensions(1920, 1080);
     await _engine.setVideoEncoderConfiguration(configuration);
-    await _engine.joinChannel(Token, widget.channelName, null, 0);
+    await _engine.joinChannel(Token, channelName, null, 0);
   }
 
   Future<void> _initAgoraRtcEngine() async {
